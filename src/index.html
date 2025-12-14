@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="B&B Confecções - Uniformes personalizados desde 2006. Uniformes profissionais, escolares e corporativos.">
+    <meta name="theme-color" content="#ff7a00">
+
+    <title>B&B Confecções - Uniformes Personalizados</title>
+
+    <link rel="manifest" href="public/manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="logo/logotipo.png">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Desktop -->
+    <header class="desktop-header" id="desktopHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="logo/logotipo.png" alt="B&B Confecções" class="logo">
+                </div>
+                <nav class="desktop-nav">
+                    <a href="#home" class="nav-link active">Início</a>
+                    <a href="#empresa" class="nav-link">Empresa</a>
+                    <a href="#produtos" class="nav-link">Produtos</a>
+                    <a href="#contato" class="nav-link">Contato</a>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Mobile/PWA -->
+    <header class="mobile-header" id="mobileHeader">
+        <div class="mobile-header-content">
+            <img src="logo/logotipo.png" alt="B&B Confecções" class="logo-mobile">
+            <button class="theme-toggle" id="themeToggleMobile" aria-label="Alternar tema">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+        <p class="tagline">Uniformes personalizados desde 2006</p>
+    </header>
+
+    <main>
+        <!-- Hero Section (Desktop Only) -->
+        <section class="hero desktop-only" id="home">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Uniformes Personalizados com Qualidade e Tradição</h1>
+                    <p class="hero-subtitle">Desde 2006 desenvolvendo soluções em uniformes profissionais, escolares e corporativos</p>
+                    <div class="hero-ctas">
+                        <button class="btn btn-primary btn-large" onclick="scrollToSection('produtos')">Ver Produtos</button>
+                        <button class="btn btn-secondary btn-large" onclick="openContactModal()">Solicitar Orçamento</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Empresa Section (Desktop First, Mobile Menu) -->
+        <section class="empresa-section" id="empresa">
+            <div class="container">
+                <h2 class="section-title">Sobre a B&B Confecções</h2>
+                <div class="empresa-content">
+                    <div class="empresa-text">
+                        <p class="empresa-intro">A B&B Confecções atua desde 2006 no desenvolvimento de uniformes profissionais, escolares e corporativos, com produção própria e atendimento personalizado.</p>
+                        <div class="diferenciais">
+                            <div class="diferencial-card glass-effect">
+                                <div class="diferencial-icon">🏭</div>
+                                <h3>Produção Própria</h3>
+                                <p>Controle total de qualidade do início ao fim</p>
+                            </div>
+                            <div class="diferencial-card glass-effect">
+                                <div class="diferencial-icon">✨</div>
+                                <h3>Personalização</h3>
+                                <p>Bordados, silk e sublimação de alta qualidade</p>
+                            </div>
+                            <div class="diferencial-card glass-effect">
+                                <div class="diferencial-icon">🤝</div>
+                                <h3>Atendimento B2B</h3>
+                                <p>Soluções completas para empresas e instituições</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categorias (Desktop Grid, Mobile Cards) -->
+        <section class="categorias-section" id="categorias">
+            <div class="container">
+                <h2 class="section-title">Categorias</h2>
+                <div class="categorias-grid" id="categoriasGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Produtos Section -->
+        <section class="produtos-section" id="produtos">
+            <div class="container">
+                <h2 class="section-title">Nossos Produtos</h2>
+
+                <!-- Filter Tabs -->
+                <div class="filter-tabs" id="filterTabs">
+                    <button class="filter-tab active" data-category="todos">Todos</button>
+                    <!-- More tabs populated by JS -->
+                </div>
+
+                <!-- Products Grid -->
+                <div class="produtos-grid" id="produtosGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato Section -->
+        <section class="contato-section" id="contato">
+            <div class="container">
+                <h2 class="section-title">Entre em Contato</h2>
+                <div class="contato-content">
+                    <div class="contato-card glass-effect">
+                        <div class="contato-icon">📱</div>
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/5511999999999" class="contato-link">(11) 99999-9999</a>
+                    </div>
+                    <div class="contato-card glass-effect">
+                        <div class="contato-icon">📞</div>
+                        <h3>Telefone</h3>
+                        <a href="tel:+551133333333" class="contato-link">(11) 3333-3333</a>
+                    </div>
+                    <div class="contato-card glass-effect">
+                        <div class="contato-icon">✉️</div>
+                        <h3>E-mail</h3>
+                        <a href="mailto:contato@bebconfeccoes.com.br" class="contato-link">contato@bebconfeccoes.com.br</a>
+                    </div>
+                    <div class="contato-card glass-effect">
+                        <div class="contato-icon">📍</div>
+                        <h3>Endereço</h3>
+                        <p class="contato-text">São Paulo - SP</p>
+                    </div>
+                </div>
+                <div class="cta-center">
+                    <button class="btn btn-primary btn-large" onclick="openContactModal()">Solicitar Orçamento</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2006-2025 B&B Confecções. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bottom Tab Bar (Mobile/PWA Only) -->
+    <nav class="tabbar" id="tabbar">
+        <a href="#produtos" class="tab-item active" data-tab="produtos">
+            <span class="tab-icon">🏠</span>
+            <span class="tab-label">Produtos</span>
+        </a>
+        <a href="#categorias" class="tab-item" data-tab="categorias">
+            <span class="tab-icon">🧵</span>
+            <span class="tab-label">Categorias</span>
+        </a>
+        <a href="#empresa" class="tab-item" data-tab="empresa">
+            <span class="tab-icon">🏢</span>
+            <span class="tab-label">Empresa</span>
+        </a>
+        <a href="#contato" class="tab-item" data-tab="contato">
+            <span class="tab-icon">📞</span>
+            <span class="tab-label">Contato</span>
+        </a>
+    </nav>
+
+    <!-- Modal de Produto -->
+    <div class="modal" id="productModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content glass-effect">
+            <button class="modal-close" onclick="closeModal()" aria-label="Fechar">&times;</button>
+
+            <div class="modal-header">
+                <img id="modalProductImage" src="" alt="" class="modal-product-image">
+                <div class="modal-product-info">
+                    <h2 id="modalProductName" class="modal-product-name"></h2>
+                    <p id="modalProductCategory" class="modal-product-category"></p>
+                </div>
+            </div>
+
+            <form class="modal-form" id="productForm">
+                <div class="form-group">
+                    <label for="formNome">Nome *</label>
+                    <input type="text" id="formNome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="formEmpresa">Empresa *</label>
+                    <input type="text" id="formEmpresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="formCNPJ">CNPJ</label>
+                    <input type="text" id="formCNPJ" placeholder="00.000.000/0000-00">
+                </div>
+
+                <div class="form-group">
+                    <label for="formWhatsApp">WhatsApp *</label>
+                    <input type="tel" id="formWhatsApp" required placeholder="(11) 99999-9999">
+                </div>
+
+                <div class="form-group">
+                    <label for="formEmail">E-mail *</label>
+                    <input type="email" id="formEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="formQuantidade">Quantidade *</label>
+                    <input type="number" id="formQuantidade" required min="1" placeholder="Ex: 50">
+                </div>
+
+                <div class="form-group">
+                    <label for="formDescricao">Observações</label>
+                    <textarea id="formDescricao" rows="3" placeholder="Cores, tamanhos, detalhes especiais..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary btn-large btn-block">
+                        <span id="btnText">🔶 Enviar Pedido</span>
+                        <span id="btnLoading" class="hidden">Enviando...</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-large btn-block" onclick="openWhatsApp()">
+                        💬 Falar no WhatsApp
+                    </button>
+                </div>
+            </form>
+
+            <div class="success-message hidden" id="successMessage">
+                <div class="success-icon">✅</div>
+                <h3>Pedido enviado com sucesso!</h3>
+                <p>Em breve entraremos em contato.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal (Quick Contact) -->
+    <div class="modal" id="contactModal">
+        <div class="modal-overlay" onclick="closeContactModal()"></div>
+        <div class="modal-content glass-effect">
+            <button class="modal-close" onclick="closeContactModal()" aria-label="Fechar">&times;</button>
+
+            <div class="modal-header">
+                <h2>Solicitar Orçamento</h2>
+                <p>Preencha os dados abaixo ou fale conosco pelo WhatsApp</p>
+            </div>
+
+            <form class="modal-form" id="contactForm">
+                <div class="form-group">
+                    <label for="contactNome">Nome *</label>
+                    <input type="text" id="contactNome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmpresa">Empresa *</label>
+                    <input type="text" id="contactEmpresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactWhatsApp">WhatsApp *</label>
+                    <input type="tel" id="contactWhatsApp" required placeholder="(11) 99999-9999">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmail">E-mail *</label>
+                    <input type="email" id="contactEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactMensagem">Mensagem</label>
+                    <textarea id="contactMensagem" rows="4" placeholder="Descreva o que precisa..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary btn-large btn-block">
+                        <span id="contactBtnText">🔶 Enviar</span>
+                        <span id="contactBtnLoading" class="hidden">Enviando...</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-large btn-block" onclick="openWhatsAppDirect()">
+                        💬 Falar no WhatsApp
+                    </button>
+                </div>
+            </form>
+
+            <div class="success-message hidden" id="contactSuccessMessage">
+                <div class="success-icon">✅</div>
+                <h3>Mensagem enviada!</h3>
+                <p>Entraremos em contato em breve.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "bb-confeccoes-pwa",
+  "version": "1.0.0",
+  "description": "B&B Confecções - PWA para uniformes personalizados",
+  "main": "src/index.html",
+  "scripts": {
+    "generate-icons": "node generate-icons.js",
+    "start": "npx serve -s . -p 3000",
+    "build": "echo 'No build step required - static PWA'"
+  },
+  "keywords": [
+    "pwa",
+    "uniformes",
+    "confeccoes"
+  ],
+  "author": "B&B Confecções",
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}

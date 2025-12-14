@@ -1,0 +1,326 @@
+{
+  "categorias": [
+    {
+      "id": "camisetas-polos",
+      "nome": "Camisetas e Polos",
+      "descricao": "Camisetas, polos e baby looks personalizadas",
+      "produtos": [
+        {
+          "id": "polo-hungria",
+          "nome": "Camisa Polo Hungria",
+          "imagem": "produtos/Camisa polo hungria.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "polo-bulgaria",
+          "nome": "Camisa Polo Bulgária 2 Cores",
+          "imagem": "produtos/Camisa bulgaria 2 cores.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "polo-argentina",
+          "nome": "Camisa Polo Argentina Vinho",
+          "imagem": "produtos/camisa Polo Argentina vinho.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "polo-australia",
+          "nome": "Camisa Polo Austrália Cinza Mescla",
+          "imagem": "produtos/camisa Polo Austrália - cinza mescla.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "polo-masculina",
+          "nome": "Camisa Polo Masculina",
+          "imagem": "produtos/camisa polo masculina.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "polo-refletiva",
+          "nome": "Camisa Polo com Faixa Refletiva",
+          "imagem": "produtos/Camisa polo com faixa refletiva.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "baby-look-polo",
+          "nome": "Baby Look Polo",
+          "imagem": "produtos/baby look polo.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "baby-look-algodao",
+          "nome": "Baby Look 100% Algodão",
+          "imagem": "produtos/baby look 100_ algodão.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "baby-look",
+          "nome": "Baby Look",
+          "imagem": "produtos/baby look.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "baby-look-alongada",
+          "nome": "Baby Look Alongada",
+          "imagem": "produtos/Baby look alongada.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "baby-look-dryfit",
+          "nome": "Baby Look Dryfit",
+          "imagem": "produtos/Baby Look dryfit - Manequim.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "baby-look-sublimada",
+          "nome": "Baby Look Sublimada",
+          "imagem": "produtos/baby look sublimada.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camiseta-manga-curta",
+          "nome": "Camiseta Manga Curta",
+          "imagem": "produtos/camiseta manga curta.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camiseta-manga-longa",
+          "nome": "Camiseta Manga Longa",
+          "imagem": "produtos/camiseta manga longa.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camiseta-gola-v",
+          "nome": "Camiseta Gola V",
+          "imagem": "produtos/Camiseta gola V.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camisete-social",
+          "nome": "Camisete Social",
+          "imagem": "produtos/camisete social.png",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camisete-social-curta",
+          "nome": "Camisete Social Manga Curta",
+          "imagem": "produtos/Camisete social manga curta.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camisete-social-fem",
+          "nome": "Camisete Social Feminina",
+          "imagem": "produtos/Camisete social feminina.jpg",
+          "categoria": "Camisetas e Polos"
+        },
+        {
+          "id": "camisete-manga-longa",
+          "nome": "Camisete Manga Longa",
+          "imagem": "produtos/camisete manga longa.png",
+          "categoria": "Camisetas e Polos"
+        }
+      ]
+    },
+    {
+      "id": "jaquetas-moletons",
+      "nome": "Jaquetas e Moletons",
+      "descricao": "Moletons, jaquetas e suéteres corporativos",
+      "produtos": [
+        {
+          "id": "moletom-capuz",
+          "nome": "Moletom Aberto com Touca",
+          "imagem": "produtos/moletom aberto com touca.JPG",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "moletom-sem-capuz",
+          "nome": "Moletom Aberto sem Capuz",
+          "imagem": "produtos/Moletom aberto sem capuz.png",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "moletom-gola-careca",
+          "nome": "Moletom Gola Careca",
+          "imagem": "produtos/Moletom gola careca.png",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "jaqueta-australia",
+          "nome": "Jaqueta Austrália",
+          "imagem": "produtos/Jaqueta Austrália.png",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "jaqueta-australia-forro",
+          "nome": "Jaqueta Austrália com Forro",
+          "imagem": "produtos/Jaqueta Austrália forro - interior.png",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "jaqueta-argentina",
+          "nome": "Jaqueta Argentina",
+          "imagem": "produtos/Jaqueta Argentina.png",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "sueter",
+          "nome": "Suéter Azul Marinho",
+          "imagem": "produtos/Suéter  azul marinho.jpg",
+          "categoria": "Jaquetas e Moletons"
+        },
+        {
+          "id": "cardigan",
+          "nome": "Cardigan Feminino",
+          "imagem": "produtos/Cardigan Fem.jpg",
+          "categoria": "Jaquetas e Moletons"
+        }
+      ]
+    },
+    {
+      "id": "uniformes-profissionais",
+      "nome": "Uniformes Profissionais",
+      "descricao": "Jalecos, aventais, uniformes médicos e corporativos",
+      "produtos": [
+        {
+          "id": "jaleco-italiana",
+          "nome": "Jaleco Gola Italiana Manga Longa",
+          "imagem": "produtos/Jaleco gola italiana manga longa.jpg",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "jaleco-v-curta",
+          "nome": "Jaleco Gola V Manga Curta",
+          "imagem": "produtos/Jaleco gola V - manga curta.jpg",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "jaleco-3-4",
+          "nome": "Jaleco 3/4 Manga Curta",
+          "imagem": "produtos/Jaleco 3-4 Manga Curta.jpg",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "jaleco-oxford",
+          "nome": "Jaleco Oxford",
+          "imagem": "produtos/Jaleco Oxford.png",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "jaleco-copeira",
+          "nome": "Jaleco Copeira",
+          "imagem": "produtos/jaleco copeira.png",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "avental-china",
+          "nome": "Avental China",
+          "imagem": "produtos/Avental china.PNG",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "avental-frente",
+          "nome": "Avental de Frente",
+          "imagem": "produtos/avental de frente.png",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "dolma",
+          "nome": "Dolma",
+          "imagem": "produtos/Dolma .jpg",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "scrub-frente",
+          "nome": "Scrub Pijama Hospitalar",
+          "imagem": "produtos/scrub pijama hospitalar.png",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "scrub-costas",
+          "nome": "Scrub Pijama Hospital Costas",
+          "imagem": "produtos/scrub pijama hospital costas.png",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "blazer-fem",
+          "nome": "Blazer Feminino",
+          "imagem": "produtos/blazer feminino.png",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "calca-brim-elastico",
+          "nome": "Calça Brim Elástico Total com Cordão",
+          "imagem": "produtos/Calça brim elástico total com cordão.jpeg",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "calca-brim-6bolsos",
+          "nome": "Calça Brim 6 Bolsos (2 Cargo)",
+          "imagem": "produtos/Calça brim meio elástico ou cós total, 6 bolsos (2cargo).jpeg",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "calca-jeans",
+          "nome": "Calça Jeans",
+          "imagem": "produtos/Calça Jeans.PNG",
+          "categoria": "Uniformes Profissionais"
+        },
+        {
+          "id": "calca-fuso",
+          "nome": "Calça Fusô",
+          "imagem": "produtos/calça fusô.png",
+          "categoria": "Uniformes Profissionais"
+        }
+      ]
+    },
+    {
+      "id": "uniformes-escolares",
+      "nome": "Uniformes Escolares",
+      "descricao": "Uniformes completos para escolas e colégios",
+      "produtos": [
+        {
+          "id": "colegio-jaqueta",
+          "nome": "Jaqueta Aberta Escolar",
+          "imagem": "produtos/Colegio - jaqueta aberta (chimpa, tactel, helanca ou moleton).jpg",
+          "categoria": "Uniformes Escolares"
+        },
+        {
+          "id": "colegio-calca",
+          "nome": "Calça Escolar",
+          "imagem": "produtos/Colegio - calça (chimpa, tactel, helanca ou moleton).jpg",
+          "categoria": "Uniformes Escolares"
+        },
+        {
+          "id": "colegio-conjunto",
+          "nome": "Conjunto Esporte Escolar",
+          "imagem": "produtos/Colegio - conjunto esporte (dryfit, PV, tactel).jpg",
+          "categoria": "Uniformes Escolares"
+        },
+        {
+          "id": "colegio-camiseta",
+          "nome": "Camiseta Escolar",
+          "imagem": "produtos/Colegio - camiseta (algodão, PV, dryfit).jpg",
+          "categoria": "Uniformes Escolares"
+        },
+        {
+          "id": "colegio-shorts-saia",
+          "nome": "Shorts Saia Escolar",
+          "imagem": "produtos/Colegio - shorts saia (tactel, helanca ou suplex).jpg",
+          "categoria": "Uniformes Escolares"
+        },
+        {
+          "id": "colegio-bermuda",
+          "nome": "Bermuda Feminina Escolar",
+          "imagem": "produtos/Colegio - bermuda fem. (helanca ou suplex).jpg",
+          "categoria": "Uniformes Escolares"
+        },
+        {
+          "id": "colegio-moletom",
+          "nome": "Moletom Fechado com Capuz Escolar",
+          "imagem": "produtos/Moletom fechado com capuz e bolso canguru - Colégio.png",
+          "categoria": "Uniformes Escolares"
+        }
+      ]
+    }
+  ]
+}
