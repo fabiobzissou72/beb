@@ -2,7 +2,7 @@
   "name": "B&B Confecções - Uniformes Personalizados",
   "short_name": "B&B Confecções",
   "description": "Uniformes profissionais, escolares e corporativos personalizados desde 2006",
-  "start_url": "../src/index.html?pwa=true",
+  "start_url": "/?pwa=true",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff7a00",
@@ -82,7 +82,7 @@
       "name": "Ver Produtos",
       "short_name": "Produtos",
       "description": "Ver catálogo de produtos",
-      "url": "../src/index.html#produtos",
+      "url": "/#produtos",
       "icons": [
         {
           "src": "icons/icon-192.png",
@@ -94,7 +94,7 @@
       "name": "Solicitar Orçamento",
       "short_name": "Orçamento",
       "description": "Solicitar orçamento rápido",
-      "url": "../src/index.html#contato",
+      "url": "/#contato",
       "icons": [
         {
           "src": "icons/icon-192.png",
@@ -104,7 +104,7 @@
     }
   ],
   "share_target": {
-    "action": "../src/index.html",
+    "action": "/",
     "method": "GET",
     "params": {
       "title": "title",
