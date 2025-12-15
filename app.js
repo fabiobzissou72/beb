@@ -13,7 +13,6 @@ let selectedProduct = null;
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcons(savedTheme);
 }
 
 function toggleTheme() {
@@ -21,14 +20,6 @@ function toggleTheme() {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    updateThemeIcons(newTheme);
-}
-
-function updateThemeIcons(theme) {
-    const icons = document.querySelectorAll('.theme-icon');
-    icons.forEach(icon => {
-        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    });
 }
 
 // ==================== PWA Detection ====================
@@ -45,14 +36,11 @@ function initPWA() {
             .catch(err => console.log('Service Worker registration failed', err));
     }
 
-    // Detect PWA mode and adjust UI
     const isPWAMode = isPWA();
-    console.log('PWA Mode:', isPWAMode);
-
-    // Add class to body for CSS targeting
     if (isPWAMode) {
         document.body.classList.add('pwa-mode');
     }
+    console.log('PWA Mode:', isPWAMode);
 }
 
 // ==================== Products Loading ====================
@@ -60,62 +48,48 @@ async function loadProducts() {
     try {
         const response = await fetch('products.json');
         productsData = await response.json();
-        renderCategories();
-        renderFilterTabs();
+        renderFilterButtons();
         renderProducts();
     } catch (error) {
         console.error('Error loading products:', error);
+        showProductsError();
     }
 }
 
-// ==================== Render Categories ====================
-function renderCategories() {
-    const grid = document.getElementById('categoriasGrid');
-    if (!grid || !productsData) return;
-
-    const categoryIcons = {
-        'camisetas-polos': '👕',
-        'jaquetas-moletons': '🧥',
-        'uniformes-profissionais': '👔',
-        'uniformes-escolares': '🎓'
-    };
-
-    grid.innerHTML = productsData.categorias.map(cat => `
-        <div class="categoria-card" onclick="filterByCategory('${cat.id}')">
-            <div class="categoria-icon">${categoryIcons[cat.id] || '📦'}</div>
-            <h3>${cat.nome}</h3>
-            <p>${cat.descricao}</p>
-        </div>
-    `).join('');
+function showProductsError() {
+    const grid = document.querySelector('.products-grid');
+    if (grid) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-2);">Erro ao carregar produtos. Por favor, recarregue a página.</p>';
+    }
 }
 
-// ==================== Render Filter Tabs ====================
-function renderFilterTabs() {
-    const container = document.getElementById('filterTabs');
+// ==================== Render Filter Buttons ====================
+function renderFilterButtons() {
+    const container = document.querySelector('.filter-buttons');
     if (!container || !productsData) return;
 
-    const tabs = [
-        { id: 'todos', label: 'Todos' },
+    const filters = [
+        { id: 'todos', label: 'Todos os Produtos' },
         ...productsData.categorias.map(cat => ({
             id: cat.id,
             label: cat.nome
         }))
     ];
 
-    container.innerHTML = tabs.map(tab => `
+    container.innerHTML = filters.map(filter => `
         <button
-            class="filter-tab ${tab.id === currentCategory ? 'active' : ''}"
-            data-category="${tab.id}"
-            onclick="filterByCategory('${tab.id}')"
+            class="filter-btn ${filter.id === currentCategory ? 'active' : ''}"
+            data-category="${filter.id}"
+            onclick="filterByCategory('${filter.id}')"
         >
-            ${tab.label}
+            ${filter.label}
         </button>
     `).join('');
 }
 
 // ==================== Render Products ====================
 function renderProducts(categoryId = 'todos') {
-    const grid = document.getElementById('produtosGrid');
+    const grid = document.querySelector('.products-grid');
     if (!grid || !productsData) return;
 
     let allProducts = [];
@@ -131,15 +105,19 @@ function renderProducts(categoryId = 'todos') {
         }
     }
 
+    if (allProducts.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-2);">Nenhum produto encontrado nesta categoria.</p>';
+        return;
+    }
+
     grid.innerHTML = allProducts.map(product => `
         <div class="product-card" onclick='openProductModal(${JSON.stringify(product).replace(/'/g, "&apos;")})'>
-            <div class="product-image-container">
-                <img src="${product.imagem}" alt="${product.nome}" class="product-image" loading="lazy">
+            <div class="product-image">
+                <img src="${product.imagem}" alt="${product.nome}" loading="lazy">
             </div>
-            <div class="product-info">
-                <h3 class="product-name">${product.nome}</h3>
-                <p class="product-category">${product.categoria}</p>
-                <button class="product-cta">Solicitar Orçamento</button>
+            <div class="product-content">
+                <h3 class="product-title">${product.nome}</h3>
+                <span class="product-category">${product.categoria}</span>
             </div>
         </div>
     `).join('');
@@ -150,83 +128,108 @@ function filterByCategory(categoryId) {
     currentCategory = categoryId;
     renderProducts(categoryId);
 
-    // Update active tab
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.category === categoryId);
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === categoryId);
     });
-
-    // Scroll to products
-    scrollToSection('produtos');
 }
 
 // ==================== Modal Management ====================
 function openProductModal(product) {
     selectedProduct = product;
     const modal = document.getElementById('productModal');
+    if (!modal) return;
 
-    document.getElementById('modalProductImage').src = product.imagem;
-    document.getElementById('modalProductImage').alt = product.nome;
-    document.getElementById('modalProductName').textContent = product.nome;
-    document.getElementById('modalProductCategory').textContent = product.categoria;
+    const modalImage = modal.querySelector('.modal-product-image');
+    const modalTitle = modal.querySelector('.modal-product-title');
+    const modalCategory = modal.querySelector('.modal-product-category');
+
+    if (modalImage) {
+        modalImage.src = product.imagem;
+        modalImage.alt = product.nome;
+    }
+    if (modalTitle) modalTitle.textContent = product.nome;
+    if (modalCategory) modalCategory.textContent = product.categoria;
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
+function closeProductModal() {
     const modal = document.getElementById('productModal');
+    if (!modal) return;
+
     modal.classList.remove('active');
     document.body.style.overflow = '';
 
     // Reset form
-    document.getElementById('productForm').reset();
-    document.getElementById('successMessage').classList.add('hidden');
-    document.getElementById('productForm').classList.remove('hidden');
+    const form = modal.querySelector('form');
+    const successMsg = modal.querySelector('.success-message');
+    const formContainer = modal.querySelector('.modal-form');
+
+    if (form) form.reset();
+    if (successMsg) successMsg.style.display = 'none';
+    if (formContainer) formContainer.style.display = 'block';
 }
 
 function openContactModal() {
     const modal = document.getElementById('contactModal');
+    if (!modal) return;
+
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeContactModal() {
     const modal = document.getElementById('contactModal');
+    if (!modal) return;
+
     modal.classList.remove('active');
     document.body.style.overflow = '';
 
     // Reset form
-    document.getElementById('contactForm').reset();
-    document.getElementById('contactSuccessMessage').classList.add('hidden');
-    document.getElementById('contactForm').classList.remove('hidden');
+    const form = modal.querySelector('form');
+    const successMsg = modal.querySelector('.success-message');
+    const formContainer = modal.querySelector('.modal-form');
+
+    if (form) form.reset();
+    if (successMsg) successMsg.style.display = 'none';
+    if (formContainer) formContainer.style.display = 'block';
 }
+
+// Close modals when clicking backdrop
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal') && e.target.classList.contains('active')) {
+        closeProductModal();
+        closeContactModal();
+    }
+});
 
 // ==================== Form Submission ====================
 async function handleProductFormSubmit(e) {
     e.preventDefault();
 
-    const btnText = document.getElementById('btnText');
-    const btnLoading = document.getElementById('btnLoading');
     const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
 
     // Show loading
-    btnText.classList.add('hidden');
-    btnLoading.classList.remove('hidden');
+    submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
 
     const formData = {
         origem: isPWA() ? 'pwa' : 'web',
+        tipo: 'orcamento-produto',
         produto: selectedProduct.nome,
         categoria: selectedProduct.categoria,
-        quantidade: parseInt(document.getElementById('formQuantidade').value),
+        quantidade: parseInt(e.target.quantidade.value) || 1,
         cliente: {
-            nome: document.getElementById('formNome').value,
-            empresa: document.getElementById('formEmpresa').value,
-            cnpj: document.getElementById('formCNPJ').value,
-            whatsapp: document.getElementById('formWhatsApp').value,
-            email: document.getElementById('formEmail').value
+            nome: e.target.nome.value,
+            empresa: e.target.empresa?.value || '',
+            cnpj: e.target.cnpj?.value || '',
+            whatsapp: e.target.whatsapp.value,
+            email: e.target.email?.value || ''
         },
-        observacoes: document.getElementById('formDescricao').value,
+        observacoes: e.target.observacoes?.value || '',
         timestamp: new Date().toISOString()
     };
 
@@ -241,12 +244,15 @@ async function handleProductFormSubmit(e) {
 
         if (response.ok) {
             // Show success message
-            document.getElementById('productForm').classList.add('hidden');
-            document.getElementById('successMessage').classList.remove('hidden');
+            const formContainer = e.target.closest('.modal-form');
+            const successMsg = document.querySelector('#productModal .success-message');
+
+            if (formContainer) formContainer.style.display = 'none';
+            if (successMsg) successMsg.style.display = 'block';
 
             // Auto close after 3 seconds
             setTimeout(() => {
-                closeModal();
+                closeProductModal();
             }, 3000);
         } else {
             throw new Error('Failed to submit');
@@ -255,8 +261,7 @@ async function handleProductFormSubmit(e) {
         console.error('Error submitting form:', error);
         alert('Erro ao enviar pedido. Por favor, tente novamente ou entre em contato pelo WhatsApp.');
     } finally {
-        btnText.classList.remove('hidden');
-        btnLoading.classList.add('hidden');
+        submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }
 }
@@ -264,25 +269,23 @@ async function handleProductFormSubmit(e) {
 async function handleContactFormSubmit(e) {
     e.preventDefault();
 
-    const btnText = document.getElementById('contactBtnText');
-    const btnLoading = document.getElementById('contactBtnLoading');
     const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
 
     // Show loading
-    btnText.classList.add('hidden');
-    btnLoading.classList.remove('hidden');
+    submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
 
     const formData = {
         origem: isPWA() ? 'pwa' : 'web',
         tipo: 'contato-geral',
         cliente: {
-            nome: document.getElementById('contactNome').value,
-            empresa: document.getElementById('contactEmpresa').value,
-            whatsapp: document.getElementById('contactWhatsApp').value,
-            email: document.getElementById('contactEmail').value
+            nome: e.target.nome.value,
+            empresa: e.target.empresa?.value || '',
+            whatsapp: e.target.whatsapp.value,
+            email: e.target.email?.value || ''
         },
-        mensagem: document.getElementById('contactMensagem').value,
+        mensagem: e.target.mensagem.value,
         timestamp: new Date().toISOString()
     };
 
@@ -297,8 +300,11 @@ async function handleContactFormSubmit(e) {
 
         if (response.ok) {
             // Show success message
-            document.getElementById('contactForm').classList.add('hidden');
-            document.getElementById('contactSuccessMessage').classList.remove('hidden');
+            const formContainer = e.target.closest('.modal-form');
+            const successMsg = document.querySelector('#contactModal .success-message');
+
+            if (formContainer) formContainer.style.display = 'none';
+            if (successMsg) successMsg.style.display = 'block';
 
             // Auto close after 3 seconds
             setTimeout(() => {
@@ -311,15 +317,17 @@ async function handleContactFormSubmit(e) {
         console.error('Error submitting form:', error);
         alert('Erro ao enviar mensagem. Por favor, tente novamente ou entre em contato pelo WhatsApp.');
     } finally {
-        btnText.classList.remove('hidden');
-        btnLoading.classList.add('hidden');
+        submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }
 }
 
 // ==================== WhatsApp ====================
 function openWhatsApp() {
-    if (!selectedProduct) return;
+    if (!selectedProduct) {
+        openWhatsAppDirect();
+        return;
+    }
 
     const message = encodeURIComponent(
         `Olá! Gostaria de solicitar um orçamento para:\n\n` +
@@ -344,34 +352,52 @@ function openWhatsAppDirect() {
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+        const headerOffset = 80;
+        const elementPosition = section.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+
+    // Close mobile menu if open
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
     }
 }
 
-function updateActiveTab() {
-    const sections = ['produtos', 'categorias', 'empresa', 'contato'];
-    const tabItems = document.querySelectorAll('.tab-item');
-    const navLinks = document.querySelectorAll('.nav-link');
+function updateActiveNav() {
+    const sections = ['home', 'sobre', 'solucoes', 'produtos', 'contato'];
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+    const desktopNavLinks = document.querySelectorAll('.nav-menu a');
 
-    let currentSection = 'produtos';
+    let currentSection = 'home';
+    let minDistance = Infinity;
 
     sections.forEach(sectionId => {
         const section = document.getElementById(sectionId);
         if (section) {
             const rect = section.getBoundingClientRect();
-            if (rect.top <= 150 && rect.bottom >= 150) {
+            const distance = Math.abs(rect.top);
+
+            if (distance < minDistance && rect.top <= 200) {
+                minDistance = distance;
                 currentSection = sectionId;
             }
         }
     });
 
-    // Update tab bar
-    tabItems.forEach(item => {
-        item.classList.toggle('active', item.dataset.tab === currentSection);
+    // Update mobile nav
+    mobileNavItems.forEach(item => {
+        const itemSection = item.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+        item.classList.toggle('active', itemSection === currentSection);
     });
 
-    // Update nav links
-    navLinks.forEach(link => {
+    // Update desktop nav
+    desktopNavLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (href) {
             const sectionId = href.replace('#', '');
@@ -401,18 +427,26 @@ function maskPhone(value) {
 
 function setupInputMasks() {
     // CNPJ masks
-    const cnpjInputs = document.querySelectorAll('#formCNPJ');
-    cnpjInputs.forEach(input => {
-        input.addEventListener('input', (e) => {
+    document.addEventListener('input', (e) => {
+        if (e.target.name === 'cnpj') {
             e.target.value = maskCNPJ(e.target.value);
-        });
-    });
-
-    // Phone masks
-    const phoneInputs = document.querySelectorAll('#formWhatsApp, #contactWhatsApp');
-    phoneInputs.forEach(input => {
-        input.addEventListener('input', (e) => {
+        }
+        if (e.target.name === 'whatsapp') {
             e.target.value = maskPhone(e.target.value);
+        }
+    });
+}
+
+// ==================== Smooth Scroll ====================
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href && href !== '#') {
+                e.preventDefault();
+                const sectionId = href.replace('#', '');
+                scrollToSection(sectionId);
+            }
         });
     });
 }
@@ -431,49 +465,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setup input masks
     setupInputMasks();
 
-    // Event Listeners
-    document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
-    document.getElementById('themeToggleMobile')?.addEventListener('click', toggleTheme);
-    document.getElementById('productForm')?.addEventListener('submit', handleProductFormSubmit);
-    document.getElementById('contactForm')?.addEventListener('submit', handleContactFormSubmit);
+    // Setup smooth scroll
+    initSmoothScroll();
 
-    // Tab bar navigation
-    document.querySelectorAll('.tab-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const tab = item.dataset.tab;
-            scrollToSection(tab);
-        });
-    });
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
 
-    // Desktop nav links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const href = link.getAttribute('href');
-            if (href) {
-                const sectionId = href.replace('#', '');
-                scrollToSection(sectionId);
-            }
-        });
-    });
+    // Product form
+    const productForm = document.querySelector('#productModal form');
+    if (productForm) {
+        productForm.addEventListener('submit', handleProductFormSubmit);
+    }
 
-    // Scroll listener for active tab
+    // Contact form
+    const contactForm = document.querySelector('#contactModal form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactFormSubmit);
+    }
+
+    // Scroll listener for active nav
     let scrollTimeout;
     window.addEventListener('scroll', () => {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateActiveTab, 100);
-    });
+        scrollTimeout = setTimeout(updateActiveNav, 100);
+    }, { passive: true });
 
-    // Close modal on Escape key
+    // Close modals on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            closeModal();
+            closeProductModal();
             closeContactModal();
         }
     });
 
-    console.log('B&B Confecções PWA initialized');
+    // Initial nav state
+    updateActiveNav();
+
+    console.log('B&B Confecções - Enterprise PWA initialized');
 });
 
 // ==================== Install Prompt ====================
@@ -482,8 +513,6 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-
-    // Could show a custom install button here
     console.log('PWA install prompt available');
 });
 
