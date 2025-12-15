@@ -392,8 +392,12 @@ function updateActiveNav() {
 
     // Update mobile nav
     mobileNavItems.forEach(item => {
-        const itemSection = item.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
-        item.classList.toggle('active', itemSection === currentSection);
+        const onclickAttr = item.getAttribute('onclick');
+        if (onclickAttr) {
+            const match = onclickAttr.match(/scrollToSection\('([^']+)'\)/);
+            const itemSection = match ? match[1] : null;
+            item.classList.toggle('active', itemSection === currentSection);
+        }
     });
 
     // Update desktop nav

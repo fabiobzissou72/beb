@@ -334,11 +334,11 @@
 
     <!-- Modal Produto -->
     <div class="modal" id="productModal">
-        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-backdrop" onclick="closeProductModal()"></div>
         <div class="modal-dialog">
             <div class="modal-header">
-                <h3 id="modalProductName"></h3>
-                <button class="modal-close" onclick="closeModal()">
+                <h3 class="modal-product-title" id="modalProductName"></h3>
+                <button class="modal-close" onclick="closeProductModal()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -346,43 +346,43 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img id="modalProductImage" src="" alt="" class="modal-product-img">
+                <img id="modalProductImage" src="" alt="" class="modal-product-image">
                 <p class="modal-product-category" id="modalProductCategory"></p>
 
-                <form class="form" id="productForm">
+                <form class="form modal-form" id="productForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Nome *</label>
-                            <input type="text" id="formNome" required>
+                            <input type="text" name="nome" id="formNome" required>
                         </div>
                         <div class="form-group">
                             <label>Empresa *</label>
-                            <input type="text" id="formEmpresa" required>
+                            <input type="text" name="empresa" id="formEmpresa" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>WhatsApp *</label>
-                            <input type="tel" id="formWhatsApp" required placeholder="(11) 99999-9999">
+                            <input type="tel" name="whatsapp" id="formWhatsApp" required placeholder="(11) 99999-9999">
                         </div>
                         <div class="form-group">
                             <label>E-mail *</label>
-                            <input type="email" id="formEmail" required>
+                            <input type="email" name="email" id="formEmail" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>CNPJ</label>
-                            <input type="text" id="formCNPJ" placeholder="00.000.000/0000-00">
+                            <input type="text" name="cnpj" id="formCNPJ" placeholder="00.000.000/0000-00">
                         </div>
                         <div class="form-group">
                             <label>Quantidade *</label>
-                            <input type="number" id="formQuantidade" required min="1" placeholder="100">
+                            <input type="number" name="quantidade" id="formQuantidade" required min="1" placeholder="100">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Observações</label>
-                        <textarea id="formDescricao" rows="3" placeholder="Detalhes adicionais..."></textarea>
+                        <textarea name="observacoes" id="formDescricao" rows="3" placeholder="Detalhes adicionais..."></textarea>
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="btn-primary">
@@ -393,7 +393,7 @@
                     </div>
                 </form>
 
-                <div class="success-message hidden" id="successMessage">
+                <div class="success-message" id="successMessage" style="display: none;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
@@ -419,30 +419,30 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form" id="contactForm">
+                <form class="form modal-form" id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Nome *</label>
-                            <input type="text" id="contactNome" required>
+                            <input type="text" name="nome" id="contactNome" required>
                         </div>
                         <div class="form-group">
                             <label>Empresa *</label>
-                            <input type="text" id="contactEmpresa" required>
+                            <input type="text" name="empresa" id="contactEmpresa" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>WhatsApp *</label>
-                            <input type="tel" id="contactWhatsApp" required placeholder="(11) 99999-9999">
+                            <input type="tel" name="whatsapp" id="contactWhatsApp" required placeholder="(11) 99999-9999">
                         </div>
                         <div class="form-group">
                             <label>E-mail *</label>
-                            <input type="email" id="contactEmail" required>
+                            <input type="email" name="email" id="contactEmail" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Mensagem</label>
-                        <textarea id="contactMensagem" rows="4" placeholder="Descreva suas necessidades..."></textarea>
+                        <textarea name="mensagem" id="contactMensagem" rows="4" placeholder="Descreva suas necessidades..."></textarea>
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="btn-primary">
@@ -452,7 +452,7 @@
                     </div>
                 </form>
 
-                <div class="success-message hidden" id="contactSuccessMessage">
+                <div class="success-message" id="contactSuccessMessage" style="display: none;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
@@ -466,34 +466,34 @@
 
     <!-- Mobile Nav -->
     <nav class="mobile-nav" id="mobileNav">
-        <a href="#home" class="mobile-nav-item active" data-section="home">
+        <button class="mobile-nav-item active" onclick="scrollToSection('home')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             </svg>
             <span>Início</span>
-        </a>
-        <a href="#produtos" class="mobile-nav-item" data-section="produtos">
+        </button>
+        <button class="mobile-nav-item" onclick="scrollToSection('produtos')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
             <span>Produtos</span>
-        </a>
-        <a href="#sobre" class="mobile-nav-item" data-section="sobre">
+        </button>
+        <button class="mobile-nav-item" onclick="scrollToSection('sobre')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="16" x2="12" y2="12"></line>
                 <line x1="12" y1="8" x2="12.01" y2="8"></line>
             </svg>
             <span>Sobre</span>
-        </a>
-        <a href="#contato" class="mobile-nav-item" data-section="contato">
+        </button>
+        <button class="mobile-nav-item" onclick="scrollToSection('contato')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
             <span>Contato</span>
-        </a>
+        </button>
     </nav>
 
     <script src="app.js"></script>
